@@ -1,0 +1,42 @@
+{
+  "name": "mte/mte-deep-copy",
+  "description": "Модуль клонирования объектов",
+  "type": "library",
+  "homepage": "http://imc-git.mte-telecom.ru/mte/mtedeepcopy",
+  "authors": [{
+    "name": "Strakhov Valeriy",
+    "email": "Strakhov@mte-telecom.ru"
+  }],
+  "keywords": [
+    "zf2",
+    "deepCopy"
+  ],
+  "autoload": {
+    "psr-4": {
+      "Mte\\MteDeepCopy\\": "src"
+    },
+    "classmap": [
+      "./Module.php"
+    ]
+  },
+  "require": {
+    "php": ">=5.5",
+    "zendframework/zendframework": "2.4.*",
+    "doctrine/dbal": "2.*",
+    "doctrine/doctrine-orm-module": "0.*",
+    "myclabs/deep-copy" : "dev-master"
+
+  },
+  "require-dev": {
+    "ext-curl": "*",
+    "fabpot/php-cs-fixer": "1.9.1",
+    "phpunit/phpunit": "4.7.7",
+    "phpunit/phpcov": "2.0.1"
+  },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/myclabs/DeepCopy.git"
+    }
+  ]
+}
