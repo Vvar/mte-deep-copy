@@ -8,7 +8,8 @@ $doctrineConfig = include 'doctrine.config.php';
 return array_merge(
     $doctrineConfig,
     [
-        'storageDocument' => [
+        'mteDeepCopy' => [
             'service' => require 'service.config.php',
+            'objectsCopyScheme' => require 'objectsCopyScheme.config.php',
         ],
 ]);

@@ -15,12 +15,7 @@ class ModuleOptions extends AbstractOptions implements FactoryInterface
      * Ключ конфигурации
      * @var string
      */
-    private $configPrefix = 'storageDocument';
-
-    /**
-     * @var array
-     */
-    protected $repositories;
+    private $configPrefix = 'metDeepCopy';
 
     /**
      * @var array
@@ -30,30 +25,7 @@ class ModuleOptions extends AbstractOptions implements FactoryInterface
     /**
      * @var array
      */
-    protected $hydrator;
-
-    /**
-     * @return array
-     */
-    public function getHydrator()
-    {
-        return $this->hydrator;
-    }
-
-    /**
-     * @param array $hydrator
-     * @return $this
-     */
-    public function setHydrator($hydrator)
-    {
-        $this->hydrator = $hydrator;
-        return $this;
-    }
-
-    public function getHydratorParams($hydratorName)
-    {
-        return isset($this->hydrator[$hydratorName]) ? $this->hydrator[$hydratorName] : false;
-    }
+    protected $objectsCopyScheme;
 
     /**
      * Create service
@@ -103,27 +75,18 @@ class ModuleOptions extends AbstractOptions implements FactoryInterface
     /**
      * @return array
      */
-    public function getRepositories()
+    public function getObjectsCopyScheme()
     {
-        return $this->repositories;
+        return $this->objectsCopyScheme;
     }
 
     /**
-     * @param $repositories
+     * @param $objectsCopyScheme
      * @return $this
      */
-    public function setRepositories($repositories)
+    public function setObjectsCopyScheme($objectsCopyScheme)
     {
-        $this->repositories = $repositories;
+        $this->objectsCopyScheme = $objectsCopyScheme;
         return $this;
-    }
-
-    /**
-     * @param $repositoriesName
-     * @return bool
-     */
-    public function getRepositoriesParams($repositoriesName)
-    {
-        return isset($this->repositories[$repositoriesName]) ? $this->repositories[$repositoriesName] : false;
     }
 }
