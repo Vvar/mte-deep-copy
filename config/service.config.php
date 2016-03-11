@@ -1,13 +1,12 @@
 <?php
-use \Mte\StorageDocument\Service;
+use \Mte\MteDeepCopy\Service;
 
 return [
     /**
-     * Default Okei Mapper
-     * Use: $this->getServiceLocator()->get('mteDeepCopy_DeepCopy');
+     * Use: $this->getServiceLocator()->get('mteDeepCopy_Copy');
      */
-    'DeepCopy' => [
-        'class' => Service\Document::class,
+    'Copy' => [
+        'class' => Service\Copy::class,
         'options' => null,
     ],
 ];

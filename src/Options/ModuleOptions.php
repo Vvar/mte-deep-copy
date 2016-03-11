@@ -15,7 +15,7 @@ class ModuleOptions extends AbstractOptions implements FactoryInterface
      * Ключ конфигурации
      * @var string
      */
-    private $configPrefix = 'metDeepCopy';
+    private $configPrefix = 'mteDeepCopy';
 
     /**
      * @var array

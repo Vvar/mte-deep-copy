@@ -1,24 +1,18 @@
 <?php
-/**
- * @company MTE Telecom, Ltd.
- * @author Roman Malashin <malashinr@mte-telecom.ru>
- */
-
 namespace Mte\MteDeepCopy;
 
 use Zend\Mvc\MvcEvent;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Mte\MteDeepCopy\Options\ModuleOptions;
-use Mte\MteDeepCopy\Service\AbstractFactory;
+use Mte\MteDeepCopy\Service\Factory;
+
 /**
  * Class Module
- * @package Mte\StorageDocument
+ * @package Mte\MteDeepCopy
  */
-class Module {
+class Module
+{
 
-    /**
-     *
-     */
     public function init() {
 
     }
@@ -93,7 +87,7 @@ class Module {
                 ModuleOptions::class => ModuleOptions::class,
             ],
             'abstract_factories' => [
-                AbstractFactory::class
+                Factory::class
             ],
         ];
     }

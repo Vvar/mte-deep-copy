@@ -13,16 +13,63 @@ use DeepCopy\Matcher\PropertyNameMatcher;
 use DeepCopy\Matcher\PropertyMatcher;
 use Mte\MteDeepCopy\Options\ModuleOptions;
 use ReflectionClass;
+use Zend\Stdlib\InitializableInterface;
+
 
 /**
  * Class CloneObject
  * @package Mte\TargetedInvestmentProgram\Grid
  */
-class Copy extends AbstractService
+class Copy extends AbstractService implements InitializableInterface
 {
 
     /**
-     * @param object$object
+     * Объект DeepCopy
+     * @var DeepCopy
+     */
+    protected $deepCopy;
+
+    /**
+     * @return DeepCopy
+     */
+    public function getDeepCopy()
+    {
+        return $this->deepCopy;
+    }
+
+    /**
+     * @param DeepCopy $deepCopy
+     */
+    public function setDeepCopy($deepCopy)
+    {
+        $this->deepCopy = $deepCopy;
+    }
+
+
+    /**
+     * Init an object
+     *
+     * @return void
+     */
+    public function init()
+    {
+        $deepCopy = new DeepCopy();
+        /** @var ModuleOptions $moduleOptions */
+        $moduleOptions = $this->getServiceManager()->get(ModuleOptions::class);
+        $objectsCopyScheme = $moduleOptions->getObjectsCopyScheme();
+
+        foreach ($objectsCopyScheme as $objectCopyScheme ) {
+            if (is_array($objectCopyScheme)) {
+                foreach($objectCopyScheme as $params) {
+                    $this->addFilter($deepCopy, $params);
+                }
+            }
+        }
+        $this->setDeepCopy($deepCopy);
+    }
+
+    /**
+     * @param object $object
      * @return mixed
      */
     public function cloneObject($object)
@@ -31,26 +78,7 @@ class Copy extends AbstractService
             throw new \RuntimeException('Не верный тип параметра');
         }
 
-        $deepCopy = new DeepCopy();
-        /** @var ModuleOptions $moduleOptions */
-        $moduleOptions = $this->getServiceManager()->get(ModuleOptions::class);
-        $objectsCopyScheme = $moduleOptions->getObjectsCopyScheme();
-
-        foreach ($objectsCopyScheme as $options) {
-            if (array_key_exists('class', $options)
-                && is_string($options['class'])
-                && array_key_exists('options', $options)
-                && is_array($options['options'])
-                && $options['class'] == get_class($object)
-            ) {
-                $options = $options['options'];
-                foreach($options as $params) {
-                    $this->addFilter($deepCopy, $params);
-                }
-            }
-        }
-
-        return $deepCopy->copy($object);
+        return $this->getDeepCopy()->copy($object);
     }
 
     /**

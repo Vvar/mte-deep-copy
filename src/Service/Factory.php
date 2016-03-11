@@ -3,12 +3,12 @@ namespace Mte\MteDeepCopy\Service;
 
 use Zend\ServiceManager\AbstractFactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-
+use Mte\MteDeepCopy\Options\ModuleOptions;
 /**
  * Class AbstractFactory
  * @package Mte\MteDeepCopy\Service
  */
-class AbstractFactory implements AbstractFactoryInterface
+class Factory implements AbstractFactoryInterface
 {
     /**
      * Алиас
@@ -50,9 +50,8 @@ class AbstractFactory implements AbstractFactoryInterface
     public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
         $className = str_replace($this->getAlias() . '_', '', $requestedName);
-
-        /** @var \Mte\StorageDocument\Options\ModuleOptions $moduleOptions */
-        $moduleOptions = $serviceLocator->get('Mte\MteDeepCopy\Options\Module');
+        /** @var \Mte\MteDeepCopy\Options\ModuleOptions $moduleOptions */
+        $moduleOptions = $serviceLocator->get(ModuleOptions::class);
         $serviceOptions = $moduleOptions->getServiceParams($className);
 
         if (!is_array($serviceOptions)) {
@@ -65,6 +64,8 @@ class AbstractFactory implements AbstractFactoryInterface
         $service = new $serviceClass (
             $serviceOptions
         );
+
+        $service->init();
 
         return $service;
     }
