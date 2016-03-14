@@ -4,6 +4,7 @@ namespace Mte\MteDeepCopy\Service;
 use Zend\ServiceManager\AbstractFactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Mte\MteDeepCopy\Options\ModuleOptions;
+
 /**
  * Class AbstractFactory
  * @package Mte\MteDeepCopy\Service
@@ -25,7 +26,6 @@ class Factory implements AbstractFactoryInterface
             $this->setAlias($options['alias']);
         }
     }
-
 
     /**
      * Determine if we can create a service with name
@@ -61,10 +61,12 @@ class Factory implements AbstractFactoryInterface
         $serviceClass = isset($serviceOptions['class']) ? $serviceOptions['class'] : null;
         $serviceOptions = isset($serviceOptions['options']) ? $serviceOptions['options'] : null;
 
+        /** @var Copy $service */
         $service = new $serviceClass (
             $serviceOptions
         );
 
+        $service->setServiceManager($serviceLocator);
         $service->init();
 
         return $service;

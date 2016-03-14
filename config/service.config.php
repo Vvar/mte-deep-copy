@@ -1,5 +1,5 @@
 <?php
-use \Mte\MteDeepCopy\Service;
+use Mte\MteDeepCopy\Service;
 
 return [
     /**

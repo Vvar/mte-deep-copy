@@ -4,13 +4,6 @@ namespace Mte\MteDeepCopy\Service;
 use DeepCopy\Filter\Filter;
 use DeepCopy\DeepCopy;
 use DeepCopy\Matcher\Matcher;
-use DeepCopy\Filter\Doctrine\DoctrineCollectionFilter;
-use DeepCopy\Filter\Doctrine\DoctrineEmptyCollectionFilter;
-use DeepCopy\Filter\SetNullFilter;
-use DeepCopy\Filter\KeepFilter;
-use DeepCopy\Matcher\PropertyTypeMatcher;
-use DeepCopy\Matcher\PropertyNameMatcher;
-use DeepCopy\Matcher\PropertyMatcher;
 use Mte\MteDeepCopy\Options\ModuleOptions;
 use ReflectionClass;
 use Zend\Stdlib\InitializableInterface;
@@ -48,20 +41,21 @@ class Copy extends AbstractService implements InitializableInterface
 
     /**
      * Init an object
-     *
-     * @return void
      */
     public function init()
     {
-        $deepCopy = new DeepCopy();
+        /** @var DeepCopy $deepCopy */
+        $deepCopy = $this->getServiceManager()->get('deepCopy');
         /** @var ModuleOptions $moduleOptions */
         $moduleOptions = $this->getServiceManager()->get(ModuleOptions::class);
         $objectsCopyScheme = $moduleOptions->getObjectsCopyScheme();
 
         foreach ($objectsCopyScheme as $objectCopyScheme ) {
             if (is_array($objectCopyScheme)) {
-                foreach($objectCopyScheme as $params) {
-                    $this->addFilter($deepCopy, $params);
+                foreach($objectCopyScheme as $key => $params) {
+                    if ($key != 'options' ) {
+                        $this->addFilter($deepCopy, $params);
+                    }
                 }
             }
         }
@@ -69,16 +63,22 @@ class Copy extends AbstractService implements InitializableInterface
     }
 
     /**
-     * @param object $object
+     * @param $object
+     * @param array $params
      * @return mixed
      */
-    public function cloneObject($object)
+    public function cloneObject($object, array $params = [])
     {
         if (!is_object($object)) {
             throw new \RuntimeException('Не верный тип параметра');
         }
 
-        return $this->getDeepCopy()->copy($object);
+        $copyObject = $this->getDeepCopy()->copy($object);
+        if (array_key_exists('history', $params) && $params['history']) {
+            $copyObject->setActual($object);
+        }
+
+        return $copyObject;
     }
 
     /**

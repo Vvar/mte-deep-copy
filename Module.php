@@ -1,6 +1,7 @@
 <?php
 namespace Mte\MteDeepCopy;
 
+use DeepCopy\DeepCopy;
 use Zend\Mvc\MvcEvent;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Mte\MteDeepCopy\Options\ModuleOptions;
@@ -89,6 +90,9 @@ class Module
             'abstract_factories' => [
                 Factory::class
             ],
+            'invokables' => [
+                'deepCopy' => DeepCopy::class
+            ]
         ];
     }
 }

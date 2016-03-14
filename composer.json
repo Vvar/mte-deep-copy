@@ -13,7 +13,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "Mte\\MteDeepCopy\\": "src"
+      "MteDeepCopy": "src"
     },
     "classmap": [
       "./Module.php"
