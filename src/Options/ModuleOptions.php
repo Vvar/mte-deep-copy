@@ -1,5 +1,5 @@
 <?php
-namespace Mte\MteDeepCopy\Options;
+namespace Mte\DeepCopy\Options;
 
 use Zend\Stdlib\AbstractOptions;
 use Zend\ServiceManager\FactoryInterface;

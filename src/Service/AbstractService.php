@@ -1,6 +1,6 @@
 <?php
 
-namespace Mte\MteDeepCopy\Service;
+namespace Mte\DeepCopy\Service;
 
 use MteBase\Service\AbstractService as MteAbstractService;
 

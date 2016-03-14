@@ -4,8 +4,8 @@ namespace Mte\MteDeepCopy;
 use DeepCopy\DeepCopy;
 use Zend\Mvc\MvcEvent;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Mte\MteDeepCopy\Options\ModuleOptions;
-use Mte\MteDeepCopy\Service\Factory;
+use Mte\DeepCopy\Options\ModuleOptions;
+use Mte\DeepCopy\Service\Factory;
 
 /**
  * Class Module

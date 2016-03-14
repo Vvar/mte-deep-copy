@@ -1,10 +1,10 @@
 <?php
-namespace Mte\MteDeepCopy\Service;
+namespace Mte\DeepCopy\Service;
 
 use DeepCopy\Filter\Filter;
 use DeepCopy\DeepCopy;
 use DeepCopy\Matcher\Matcher;
-use Mte\MteDeepCopy\Options\ModuleOptions;
+use MteDeepCopy\Options\ModuleOptions;
 use ReflectionClass;
 use Zend\Stdlib\InitializableInterface;
 

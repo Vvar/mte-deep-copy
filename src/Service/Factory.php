@@ -1,9 +1,9 @@
 <?php
-namespace Mte\MteDeepCopy\Service;
+namespace Mte\DeepCopy\Service;
 
 use Zend\ServiceManager\AbstractFactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Mte\MteDeepCopy\Options\ModuleOptions;
+use Mte\DeepCopy\Options\ModuleOptions;
 
 /**
  * Class AbstractFactory
